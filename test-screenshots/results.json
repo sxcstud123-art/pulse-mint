@@ -1,0 +1,227 @@
+{
+  "results": [
+    {
+      "n": "01",
+      "title": "connect",
+      "ok": true
+    },
+    {
+      "n": "02",
+      "title": "mint test WPLS",
+      "ok": true
+    },
+    {
+      "n": "03",
+      "title": "open vault",
+      "ok": true
+    },
+    {
+      "n": "04",
+      "title": "vault view w/ ratio + second (riskier) vault from tester",
+      "ok": true
+    },
+    {
+      "n": "05",
+      "title": "stability pool deposit",
+      "ok": true
+    },
+    {
+      "n": "06",
+      "title": "price drop -> liquidation warning -> liquidate",
+      "ok": true
+    },
+    {
+      "n": "07",
+      "title": "redemption",
+      "ok": true
+    },
+    {
+      "n": "08",
+      "title": "PMNT staking",
+      "ok": true
+    },
+    {
+      "n": "09",
+      "title": "close vault (reserve refunded)",
+      "ok": true
+    }
+  ],
+  "txs": [
+    {
+      "label": "Mint test WPLS",
+      "hash": "0x964769b7fdfeaca467fb53f9390965e4ccea406f846a83bf32250d7966076f9c",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "68156",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x964769b7fdfeaca467fb53f9390965e4ccea406f846a83bf32250d7966076f9c"
+    },
+    {
+      "label": "Open vault",
+      "hash": "0x2725c43e8b2d81d8172907c0f187384bea926d505762ee4f8e645a3bf562599e",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "46007",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x2725c43e8b2d81d8172907c0f187384bea926d505762ee4f8e645a3bf562599e"
+    },
+    {
+      "label": "Open vault",
+      "hash": "0xa210a0c29777bd4ef550191dcc211da7c3f9eec12956d8715fbc699c9f330134",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "528228",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xa210a0c29777bd4ef550191dcc211da7c3f9eec12956d8715fbc699c9f330134"
+    },
+    {
+      "label": "tester: mint 300M WPLS",
+      "hash": "0x9accb31c63e71678c9cbe0ceba8d49a3200d25beb206e251fecf65f1e38d9293",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "51044",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x9accb31c63e71678c9cbe0ceba8d49a3200d25beb206e251fecf65f1e38d9293"
+    },
+    {
+      "label": "tester: approve",
+      "hash": "0x6c3a61d9b21d78c8b0ded6bf85009e7337055f28a4b8779404495bc0cd749a41",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "45995",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x6c3a61d9b21d78c8b0ded6bf85009e7337055f28a4b8779404495bc0cd749a41"
+    },
+    {
+      "label": "tester: open vault 300M WPLS / 3,500 USDPM",
+      "hash": "0x64ff199565f6c9714ee059fad70e92492591f20ff981c0bc29b26e42952196e6",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "359637",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x64ff199565f6c9714ee059fad70e92492591f20ff981c0bc29b26e42952196e6"
+    },
+    {
+      "label": "Deposit",
+      "hash": "0x52d4f519514bc3d1a3f3de4e9be24851fdc38f7f48d2e60ccf3d6bccda7fe5ca",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "45988",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x52d4f519514bc3d1a3f3de4e9be24851fdc38f7f48d2e60ccf3d6bccda7fe5ca"
+    },
+    {
+      "label": "Deposit",
+      "hash": "0x61c6b4780a52ec6da87494951c683039ed3cb327fb1e69b987c2b853905a59ad",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "126546",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x61c6b4780a52ec6da87494951c683039ed3cb327fb1e69b987c2b853905a59ad"
+    },
+    {
+      "label": "deployer: set mock WPLS price $0.00003 -> $0.000017",
+      "hash": "0x0052a565509ee1f9055b6869bdb404a0c71acb8741bbcd12838a2b959911e8ad",
+      "from": "deployer (script)",
+      "status": "success",
+      "gas": "28619",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x0052a565509ee1f9055b6869bdb404a0c71acb8741bbcd12838a2b959911e8ad"
+    },
+    {
+      "label": "Liquidate",
+      "hash": "0x1189d35478a15e1a02bf327a55311d715d19b32824aed31edcbc240aef15134a",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "313544",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x1189d35478a15e1a02bf327a55311d715d19b32824aed31edcbc240aef15134a"
+    },
+    {
+      "label": "tester: mint 1B WPLS",
+      "hash": "0x7261a4300eeec97567f63cf5b6ba0fd92735e06a24cc47668f2edcbbc7849702",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "51056",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x7261a4300eeec97567f63cf5b6ba0fd92735e06a24cc47668f2edcbbc7849702"
+    },
+    {
+      "label": "tester: approve",
+      "hash": "0xe909b367d2cd38cda7642bec11f7bb8a752bef45ba5afaeb7dfb45313d826735",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "46007",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xe909b367d2cd38cda7642bec11f7bb8a752bef45ba5afaeb7dfb45313d826735"
+    },
+    {
+      "label": "tester: open vault 1B WPLS / 4,000 USDPM",
+      "hash": "0x1c4b751d39a425fd3c8929d37b0ae605badefe1a09f254e0e486fc0862957339",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "298057",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x1c4b751d39a425fd3c8929d37b0ae605badefe1a09f254e0e486fc0862957339"
+    },
+    {
+      "label": "tester: send 4,000 USDPM to deployer",
+      "hash": "0x905df8199d04bff3c7ff10076f54b82648ddf11fb4082801acc336fef95b79b5",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "34246",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x905df8199d04bff3c7ff10076f54b82648ddf11fb4082801acc336fef95b79b5"
+    },
+    {
+      "label": "Redeem",
+      "hash": "0x223615e8a76c94665ca1d99db28b569a514c2a74a863eea4be7fd96fac5246f5",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "215268",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x223615e8a76c94665ca1d99db28b569a514c2a74a863eea4be7fd96fac5246f5"
+    },
+    {
+      "label": "Stake",
+      "hash": "0x8c7455dffcd9dad13c5e70d29b268873cfa84e755bf4f71b3466d10dabfe1e57",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "45983",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x8c7455dffcd9dad13c5e70d29b268873cfa84e755bf4f71b3466d10dabfe1e57"
+    },
+    {
+      "label": "Stake",
+      "hash": "0xb943976fcb7edda7c0d9cb96f91b618bc3dbed965a287d4bf9cf4e095e5d1c1d",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "165331",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xb943976fcb7edda7c0d9cb96f91b618bc3dbed965a287d4bf9cf4e095e5d1c1d"
+    },
+    {
+      "label": "Close vault",
+      "hash": "0xf9c6567da1b2ec204b94cbfc116af0cfdb8d39972a4cc055ca3d7394c475158e",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "128909",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xf9c6567da1b2ec204b94cbfc116af0cfdb8d39972a4cc055ca3d7394c475158e"
+    },
+    {
+      "label": "deployer: restore mock WPLS price to $0.00003",
+      "hash": "0xbf0205b37c8e85ba896359a2125c53743041560e2d47173f4488c98e553406d8",
+      "from": "deployer (script)",
+      "status": "success",
+      "gas": "28619",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xbf0205b37c8e85ba896359a2125c53743041560e2d47173f4488c98e553406d8"
+    }
+  ],
+  "spent": {
+    "deployer": "0.003482396012188386",
+    "tester": "0.001772084006202294"
+  },
+  "gasTotal": "2627240"
+}

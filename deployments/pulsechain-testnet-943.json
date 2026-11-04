@@ -1,0 +1,52 @@
+{
+  "chainId": 943,
+  "deployedAt": "2026-11-02",
+  "deployer": "0x73b35907eC5bcc15cA56d7c87aCb4A5A60Ba0Fd4",
+  "USDPM": "0x0Dae02717020601f3F6D967C6A7284a6e82C661f",
+  "PMNT": "0x7C624E4899976e3BB4E86c435C382923663CdB27",
+  "PMNTStaking": "0xA8b5105d232637d078039257A1d94eFA0906cB4f",
+  "CommunityIssuance": "0x49eEBb525c707C59381b0B1Ec671Aa3199253593",
+  "collaterals": {
+    "WPLS": {
+      "token": "0xFD747954C015EC62b618b912C2dBe147Fc98f688",
+      "feed": "0xa47dE6Eda5431C77C42Dd2A99baF39c28F6947D1",
+      "branch": "0xed912144271b9859af6547bc3d5A85F8465e14b3"
+    },
+    "HEX": {
+      "token": "0xA16832ED05ad74C1605b8f30098096e94C240231",
+      "feed": "0xC863575eff09c67f1867E3e29cbCA1FCbf3D5E3B",
+      "branch": "0x295A0855967dAAe16f3168330332412b4F0E3203"
+    },
+    "PLSX": {
+      "token": "0xcAA7603D528055F367c0454A9152D0A74025a910",
+      "feed": "0xc4568eB4575e431d1B505aaa1e1e08E17fB105D2",
+      "branch": "0x592747D1b5E61615F47916c7Dfe97EcE04C314D7"
+    },
+    "INC": {
+      "token": "0x90091EE6ef7aa138f2c8749da8932FF7134eb122",
+      "feed": "0xE5C6c4BdF822380c3c6cC0E15B11CAbEC58BE1Be",
+      "branch": "0xB1e420340429247a583915e58B388D1d0De70fda"
+    },
+    "pDAI": {
+      "token": "0xCC5FBc1B2b7A1eA27eF2119C5934ccdC6BeF4E27",
+      "feed": "0xCbe2b6484442F2db820db066889F71Ba00b2B070",
+      "branch": "0xa07dBAdF01a7Ebb86A9207aC2A737804802cfB40"
+    },
+    "eHEX": {
+      "token": "0x25Cd939281662E4f6B400395db31b8f9B1294c0a",
+      "feed": "0x8e4392cDd72834eb01b66cB31E7B0b2fCB2940F5",
+      "branch": "0xB942a088F14F4eBe46Ebf0966E83422975B690Ae"
+    },
+    "pWETH": {
+      "token": "0x6b89013491E85C0d1a3feDCa857F4A197859A06B",
+      "feed": "0x2393765e5A61f35C90c0efeA6e86a3Cd41d61CaE",
+      "branch": "0x03B3a66f4A694d8070095f2d7587D63748DB77a4"
+    }
+  },
+  "params": {
+    "minDebt": "2000 USDPM (incl. 200 USDPM liquidation reserve)",
+    "borrowFeeBps": 50,
+    "redemptionFeeBps": 50
+  },
+  "notes": "Hardened build (debt caps, sorted list, liquidation reserve). Collateral tokens are mocks with public mint(); price feeds are MockPriceFeed owned by the deployer. Supersedes the 2026-10-18 deployment."
+}

@@ -1,0 +1,222 @@
+{
+  "results": [
+    {
+      "n": "01",
+      "title": "connect",
+      "ok": true
+    },
+    {
+      "n": "02",
+      "title": "mint test WPLS",
+      "ok": true
+    },
+    {
+      "n": "03",
+      "title": "open vault",
+      "ok": true
+    },
+    {
+      "n": "04",
+      "title": "vault view + riskier vault from tester2",
+      "ok": true
+    },
+    {
+      "n": "05",
+      "title": "stability pool deposit",
+      "ok": true
+    },
+    {
+      "n": "06",
+      "title": "price drop -> liquidation table -> liquidate",
+      "ok": true
+    },
+    {
+      "n": "07",
+      "title": "redemption",
+      "ok": true
+    },
+    {
+      "n": "08",
+      "title": "PMNT staking",
+      "ok": true
+    },
+    {
+      "n": "09",
+      "title": "close vault",
+      "ok": true
+    },
+    {
+      "n": "10",
+      "title": "all pages light + dark",
+      "ok": true
+    }
+  ],
+  "tester2": "0xd237C87F6727Bc84e078D640d179e31CeC2970f9",
+  "txs": [
+    {
+      "label": "Mint test WPLS",
+      "hash": "0x7b36137bf94d6f85eb8aa170f05d4be06118daee697ba0d28a5b93b9a2aedfe9",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "33956",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x7b36137bf94d6f85eb8aa170f05d4be06118daee697ba0d28a5b93b9a2aedfe9"
+    },
+    {
+      "label": "Open vault",
+      "hash": "0x1b48493db581985f562e7c79677e3fc1efcebe0df5354436e11054ed52a3c568",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "46007",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x1b48493db581985f562e7c79677e3fc1efcebe0df5354436e11054ed52a3c568"
+    },
+    {
+      "label": "Open vault",
+      "hash": "0x0e823defa868a8dac8a73e760bd48af9ad36f3d332eca789265b4b30e3ef1202",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "322770",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x0e823defa868a8dac8a73e760bd48af9ad36f3d332eca789265b4b30e3ef1202"
+    },
+    {
+      "label": "deployer: fund tester2 0.2 tPLS",
+      "hash": "0x7342b0500ec3cdab23dec2f6a3b458c93f64ec4714256040e7eaf430a16935f2",
+      "from": "deployer (script)",
+      "status": "success",
+      "gas": "21000",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x7342b0500ec3cdab23dec2f6a3b458c93f64ec4714256040e7eaf430a16935f2"
+    },
+    {
+      "label": "tester2: mint 300M WPLS",
+      "hash": "0xe7871d9359c80d231be4d4773bd1decf3741052e544507ae7c4bfd2839bf2c34",
+      "from": "tester2 (script)",
+      "status": "success",
+      "gas": "51044",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xe7871d9359c80d231be4d4773bd1decf3741052e544507ae7c4bfd2839bf2c34"
+    },
+    {
+      "label": "tester2: approve",
+      "hash": "0xe9be37c12d7234645d5ccaf819e8315834e2272b818316f2398a1278c7ef8ca0",
+      "from": "tester2 (script)",
+      "status": "success",
+      "gas": "45995",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xe9be37c12d7234645d5ccaf819e8315834e2272b818316f2398a1278c7ef8ca0"
+    },
+    {
+      "label": "tester2: open vault 300M WPLS / 3,500 USDPM",
+      "hash": "0xa474ac6525277f942c5d6193226b59cef06bad04327f1dc2a828d22f6b1f72c3",
+      "from": "tester2 (script)",
+      "status": "success",
+      "gas": "380637",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xa474ac6525277f942c5d6193226b59cef06bad04327f1dc2a828d22f6b1f72c3"
+    },
+    {
+      "label": "Deposit",
+      "hash": "0x5310541dff87c81b115733c7e2921e4ffdca363864b8ef93b2aea1053cbe7319",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "45988",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x5310541dff87c81b115733c7e2921e4ffdca363864b8ef93b2aea1053cbe7319"
+    },
+    {
+      "label": "Deposit",
+      "hash": "0xa4c131bd2bce971eb6d0dfeeaf342f8038678ef0c74da1e469633d6875eed8fa",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "178875",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xa4c131bd2bce971eb6d0dfeeaf342f8038678ef0c74da1e469633d6875eed8fa"
+    },
+    {
+      "label": "deployer: set mock WPLS price $0.00003 -> $0.000017",
+      "hash": "0x6fc9a4c7acd0a07151298635a81c60ebb55eab6a3b9f28a3d0ffcca5772df291",
+      "from": "deployer (script)",
+      "status": "success",
+      "gas": "28619",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x6fc9a4c7acd0a07151298635a81c60ebb55eab6a3b9f28a3d0ffcca5772df291"
+    },
+    {
+      "label": "Liquidate",
+      "hash": "0xf72480deab9bc7c7af417b884a28d5959c0b1898797fda329219d9973695a3d2",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "210944",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xf72480deab9bc7c7af417b884a28d5959c0b1898797fda329219d9973695a3d2"
+    },
+    {
+      "label": "tester: borrow 4,500 more USDPM",
+      "hash": "0xc5aa09bf2384cd2cd7e1fd6ecc97293d012ff79d75add71caaa45ccac0c5548e",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "196525",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xc5aa09bf2384cd2cd7e1fd6ecc97293d012ff79d75add71caaa45ccac0c5548e"
+    },
+    {
+      "label": "tester: send 4,500 USDPM to deployer",
+      "hash": "0xd8e5c37b566d8a6eeb522ee9741239f0a7ad9ad93ad10aec89d8c3a4258cb5bb",
+      "from": "tester (script)",
+      "status": "success",
+      "gas": "34246",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xd8e5c37b566d8a6eeb522ee9741239f0a7ad9ad93ad10aec89d8c3a4258cb5bb"
+    },
+    {
+      "label": "Redeem",
+      "hash": "0x0ee973c1a4f7a546ae0e62cc9036d2146c1ddf8add4f35d070ba6e3a0180d409",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "198886",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x0ee973c1a4f7a546ae0e62cc9036d2146c1ddf8add4f35d070ba6e3a0180d409"
+    },
+    {
+      "label": "Stake",
+      "hash": "0x5d1b030105d67f93510929a57ff87cf9920bb3de6c32d01379b4d2c6501f886a",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "45983",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0x5d1b030105d67f93510929a57ff87cf9920bb3de6c32d01379b4d2c6501f886a"
+    },
+    {
+      "label": "Stake",
+      "hash": "0xf2e6eed8977fc67f18d9427799987de37a0f1e8d1c2e681efa8f568f04005700",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "180794",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xf2e6eed8977fc67f18d9427799987de37a0f1e8d1c2e681efa8f568f04005700"
+    },
+    {
+      "label": "Close vault",
+      "hash": "0xccdb3eaad3a88cb2b8cf9d88a76ae794c6c20a0a1a3d211ad7bf954737ec268b",
+      "from": "deployer (UI)",
+      "status": "success",
+      "gas": "128915",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xccdb3eaad3a88cb2b8cf9d88a76ae794c6c20a0a1a3d211ad7bf954737ec268b"
+    },
+    {
+      "label": "deployer: restore mock WPLS price to $0.00003",
+      "hash": "0xba7a0be9e653ffcfe8b6cc222aca5c440e2f0e54743303b057e1c6b4cd8deac4",
+      "from": "deployer (script)",
+      "status": "success",
+      "gas": "28619",
+      "price": "2000000007",
+      "link": "https://scan.v4.testnet.pulsechain.com/tx/0xba7a0be9e653ffcfe8b6cc222aca5c440e2f0e54743303b057e1c6b4cd8deac4"
+    }
+  ],
+  "gasTotal": "2179803",
+  "gasCostTPLS": "0.004359606015258621",
+  "tester2Left": "0.199044647996656268"
+}

@@ -43,8 +43,8 @@ function Toast() {
 
 export default function App() {
   const [page, setPage] = useState(() => location.hash.slice(1) || 'start');
-  const [theme, setTheme] = useState(() => localStorage.getItem('pm-theme') || 'light');
-  useEffect(() => { document.documentElement.dataset.theme = theme; localStorage.setItem('pm-theme', theme); }, [theme]);
+  const [theme, setTheme] = useState(() => sessionStorage.getItem('pm-theme-session') || 'dark'); // always opens dark; toggle lasts for this tab only
+  useEffect(() => { document.documentElement.dataset.theme = theme; sessionStorage.setItem('pm-theme-session', theme); localStorage.removeItem('pm-theme'); }, [theme]);
   useEffect(() => { const f = () => setPage(location.hash.slice(1) || 'start'); addEventListener('hashchange', f); return () => removeEventListener('hashchange', f); }, []);
   const [open, setOpen] = useState(false);
   const go = (p: string) => { location.hash = p; setPage(p); setOpen(false); scrollTo(0, 0); };

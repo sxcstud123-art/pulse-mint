@@ -98,7 +98,7 @@ async function step(n, title, fn) {
 }
 
 await page.goto('http://127.0.0.1:4173/#start');
-await page.evaluate(() => localStorage.setItem('pm-theme', 'light'));
+await page.evaluate(() => sessionStorage.setItem('pm-theme-session', 'light'));
 await step('01', 'connect', async () => { await ensureConnected(); await shot('flow-01-connected-start'); });
 await step('02', 'mint test WPLS', async () => { await nav('borrow'); await ui('Mint test WPLS', () => T('mint-test').click()); await shot('flow-02-minted-wpls'); });
 await step('03', 'open vault', async () => {
@@ -149,7 +149,7 @@ await step('09', 'close vault', async () => {
 const PAGES = ['start', 'borrow', 'stability', 'staking', 'redemptions', 'liquidations', 'analytics', 'docs'];
 await step('10', 'all pages light + dark', async () => {
   for (const theme of ['light', 'dark']) {
-    await page.evaluate((t) => localStorage.setItem('pm-theme', t), theme);
+    await page.evaluate((t) => sessionStorage.setItem('pm-theme-session', t), theme);
     await page.goto('http://127.0.0.1:4173/#start'); await page.reload(); await ensureConnected();
     for (const [i, p] of PAGES.entries()) { await nav(p); if (p === 'analytics') await page.waitForTimeout(8000); await shot(`page-${String(i + 1).padStart(2, '0')}-${p}-${theme}`); }
   }

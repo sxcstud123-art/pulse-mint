@@ -1,46 +1,46 @@
 {
   "chainId": 943,
-  "deployedAt": "2026-11-02",
+  "deployedAt": "2026-11-06",
   "deployer": "0x73b35907eC5bcc15cA56d7c87aCb4A5A60Ba0Fd4",
-  "USDPM": "0x0Dae02717020601f3F6D967C6A7284a6e82C661f",
-  "PMNT": "0x7C624E4899976e3BB4E86c435C382923663CdB27",
-  "PMNTStaking": "0xA8b5105d232637d078039257A1d94eFA0906cB4f",
-  "CommunityIssuance": "0x49eEBb525c707C59381b0B1Ec671Aa3199253593",
+  "USDPM": "0x37Ee5AFfF7dA9A7b0ff371b58c898B61BdC1D224",
+  "PMNT": "0xD3AcD4642C7807e1fF366A2263f787eBf5D38e83",
+  "PMNTStaking": "0x50b7f01B33B73E19b56F3cb6a9adaC96A576B182",
+  "CommunityIssuance": "0xAb8776C5066bcD694Dc8Fb56b6387a93f8526B4b",
   "collaterals": {
     "WPLS": {
-      "token": "0xFD747954C015EC62b618b912C2dBe147Fc98f688",
-      "feed": "0xa47dE6Eda5431C77C42Dd2A99baF39c28F6947D1",
-      "branch": "0xed912144271b9859af6547bc3d5A85F8465e14b3"
+      "token": "0x6d8B1d8033c6D0374E284Cc1765e0EFc887f97d9",
+      "feed": "0xC601e4Cb29d40B954CB606b467d2ec9212e237C6",
+      "branch": "0xFE365E24d9655C74e9DbFf567aa982a10DD66Bbd"
     },
     "HEX": {
-      "token": "0xA16832ED05ad74C1605b8f30098096e94C240231",
-      "feed": "0xC863575eff09c67f1867E3e29cbCA1FCbf3D5E3B",
-      "branch": "0x295A0855967dAAe16f3168330332412b4F0E3203"
+      "token": "0x6b8e3a06683CdfB666fa0eaabf514066f32d80fB",
+      "feed": "0xCe2f2711099827a381cCbE473C5E82D79a55cE7C",
+      "branch": "0x3C46CABBCce61931025ef7C83A89B9f578030D40"
     },
     "PLSX": {
-      "token": "0xcAA7603D528055F367c0454A9152D0A74025a910",
-      "feed": "0xc4568eB4575e431d1B505aaa1e1e08E17fB105D2",
-      "branch": "0x592747D1b5E61615F47916c7Dfe97EcE04C314D7"
+      "token": "0x4842572aCF24103DcCa20606483d71Fe2C695fB2",
+      "feed": "0x6C72b4Fc2D7a7E8E7e92d3092a38ce9eBa5dD04E",
+      "branch": "0x51Bb28653ec909eD14CF0586ce3863022280506E"
     },
     "INC": {
-      "token": "0x90091EE6ef7aa138f2c8749da8932FF7134eb122",
-      "feed": "0xE5C6c4BdF822380c3c6cC0E15B11CAbEC58BE1Be",
-      "branch": "0xB1e420340429247a583915e58B388D1d0De70fda"
+      "token": "0x1eD7cC52A2c9cD8B2798B13797bb155eC835B474",
+      "feed": "0x365b49A3FeE055f3D3bBa0fe1e728D7587C02DAa",
+      "branch": "0x9CB57Ff8237eadA58d7b15b159275030820d7E1c"
     },
     "pDAI": {
-      "token": "0xCC5FBc1B2b7A1eA27eF2119C5934ccdC6BeF4E27",
-      "feed": "0xCbe2b6484442F2db820db066889F71Ba00b2B070",
-      "branch": "0xa07dBAdF01a7Ebb86A9207aC2A737804802cfB40"
+      "token": "0x1b9cafdA35C18A3909B60cd21B52a83DB4AF1AFd",
+      "feed": "0x2628b319e08bC167A625C43003c03CDE5c22c201",
+      "branch": "0xE2281eDc151ee3c0c489B89243Fb1de53F395f4e"
     },
     "eHEX": {
-      "token": "0x25Cd939281662E4f6B400395db31b8f9B1294c0a",
-      "feed": "0x8e4392cDd72834eb01b66cB31E7B0b2fCB2940F5",
-      "branch": "0xB942a088F14F4eBe46Ebf0966E83422975B690Ae"
+      "token": "0x69684B0487BB3f53505Edb06B6815ED5c4fd7452",
+      "feed": "0x4B3E78ce7c7738c9B5136DbdF5A82648739eCc68",
+      "branch": "0x739bf5151b54cF6418F27f944Ce278584b4B460F"
     },
     "pWETH": {
-      "token": "0x6b89013491E85C0d1a3feDCa857F4A197859A06B",
-      "feed": "0x2393765e5A61f35C90c0efeA6e86a3Cd41d61CaE",
-      "branch": "0x03B3a66f4A694d8070095f2d7587D63748DB77a4"
+      "token": "0xeABc4F7FC8452272BAACc8Ecb12Bf016bd631a04",
+      "feed": "0x305A9FC9531DcF3906AF125E5D59f165B542AB12",
+      "branch": "0xa2C7aEEdC0CAeaaDadcc3730899f93Efd18511C1"
     }
   },
   "params": {
@@ -48,5 +48,6 @@
     "borrowFeeBps": 50,
     "redemptionFeeBps": 50
   },
-  "notes": "Hardened build (debt caps, sorted list, liquidation reserve). Collateral tokens are mocks with public mint(); price feeds are MockPriceFeed owned by the deployer. Supersedes the 2026-10-18 deployment."
+  "notes": "Price-feed hardening build: Branch pauses new borrowing/collateral withdrawal when the feed reports a too-old price (>2h) and pauses redemptions on Disagree/Frozen; repay, add collateral, close and liquidations always work. Collateral tokens are mocks with public mint(); price feeds are MockPriceFeed owned by the deployer (setPrice + setFlags for demos). Supersedes the 2026-11-02 deployment.",
+  "deployBlock": 25830539
 }

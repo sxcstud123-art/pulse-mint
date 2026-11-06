@@ -18,21 +18,21 @@ export const wagmiConfig = createConfig({
 });
 
 const Z = '0x0000000000000000000000000000000000000000' as const;
-// PulseChain testnet v4 (chain 943) deployment, 2026-11-02 (hardened build). Collateral tokens are MOCKS with a public mint().
+// PulseChain testnet v4 (chain 943) deployment, 2026-11-06 (price-feed hardening build). Collateral tokens are MOCKS with a public mint().
 export const ADDR = {
-  usdpm: '0x0Dae02717020601f3F6D967C6A7284a6e82C661f' as `0x${string}`,
-  pmnt: '0x7C624E4899976e3BB4E86c435C382923663CdB27' as `0x${string}`,
-  staking: '0xA8b5105d232637d078039257A1d94eFA0906cB4f' as `0x${string}`,
-  issuance: '0x49eEBb525c707C59381b0B1Ec671Aa3199253593' as `0x${string}`,
+  usdpm: '0x37Ee5AFfF7dA9A7b0ff371b58c898B61BdC1D224' as `0x${string}`,
+  pmnt: '0xD3AcD4642C7807e1fF366A2263f787eBf5D38e83' as `0x${string}`,
+  staking: '0x50b7f01B33B73E19b56F3cb6a9adaC96A576B182' as `0x${string}`,
+  issuance: '0xAb8776C5066bcD694Dc8Fb56b6387a93f8526B4b' as `0x${string}`,
 };
 export type Coll = { symbol: string; decimals: number; token: `0x${string}`; branch: `0x${string}`; mcr: number };
 export const COLLATERALS: Coll[] = [
-  { symbol: 'WPLS', decimals: 18, token: '0xFD747954C015EC62b618b912C2dBe147Fc98f688', branch: '0xed912144271b9859af6547bc3d5A85F8465e14b3', mcr: 150 },
-  { symbol: 'HEX', decimals: 8, token: '0xA16832ED05ad74C1605b8f30098096e94C240231', branch: '0x295A0855967dAAe16f3168330332412b4F0E3203', mcr: 175 },
-  { symbol: 'PLSX', decimals: 18, token: '0xcAA7603D528055F367c0454A9152D0A74025a910', branch: '0x592747D1b5E61615F47916c7Dfe97EcE04C314D7', mcr: 150 },
-  { symbol: 'INC', decimals: 18, token: '0x90091EE6ef7aa138f2c8749da8932FF7134eb122', branch: '0xB1e420340429247a583915e58B388D1d0De70fda', mcr: 200 },
-  { symbol: 'pDAI', decimals: 18, token: '0xCC5FBc1B2b7A1eA27eF2119C5934ccdC6BeF4E27', branch: '0xa07dBAdF01a7Ebb86A9207aC2A737804802cfB40', mcr: 150 },
-  { symbol: 'eHEX', decimals: 8, token: '0x25Cd939281662E4f6B400395db31b8f9B1294c0a', branch: '0xB942a088F14F4eBe46Ebf0966E83422975B690Ae', mcr: 175 },
-  { symbol: 'pWETH', decimals: 18, token: '0x6b89013491E85C0d1a3feDCa857F4A197859A06B', branch: '0x03B3a66f4A694d8070095f2d7587D63748DB77a4', mcr: 120 },
+  { symbol: 'WPLS', decimals: 18, token: '0x6d8B1d8033c6D0374E284Cc1765e0EFc887f97d9', branch: '0xFE365E24d9655C74e9DbFf567aa982a10DD66Bbd', mcr: 150 },
+  { symbol: 'HEX', decimals: 8, token: '0x6b8e3a06683CdfB666fa0eaabf514066f32d80fB', branch: '0x3C46CABBCce61931025ef7C83A89B9f578030D40', mcr: 175 },
+  { symbol: 'PLSX', decimals: 18, token: '0x4842572aCF24103DcCa20606483d71Fe2C695fB2', branch: '0x51Bb28653ec909eD14CF0586ce3863022280506E', mcr: 150 },
+  { symbol: 'INC', decimals: 18, token: '0x1eD7cC52A2c9cD8B2798B13797bb155eC835B474', branch: '0x9CB57Ff8237eadA58d7b15b159275030820d7E1c', mcr: 200 },
+  { symbol: 'pDAI', decimals: 18, token: '0x1b9cafdA35C18A3909B60cd21B52a83DB4AF1AFd', branch: '0xE2281eDc151ee3c0c489B89243Fb1de53F395f4e', mcr: 150 },
+  { symbol: 'eHEX', decimals: 8, token: '0x69684B0487BB3f53505Edb06B6815ED5c4fd7452', branch: '0x739bf5151b54cF6418F27f944Ce278584b4B460F', mcr: 175 },
+  { symbol: 'pWETH', decimals: 18, token: '0xeABc4F7FC8452272BAACc8Ecb12Bf016bd631a04', branch: '0xa2C7aEEdC0CAeaaDadcc3730899f93Efd18511C1', mcr: 120 },
 ];
-export const DEPLOY_BLOCK = 25799061n; // first block of the 2026-11-02 deployment
+export const DEPLOY_BLOCK = 25830539n; // first block of the 2026-11-06 deployment

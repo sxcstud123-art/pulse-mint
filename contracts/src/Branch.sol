@@ -163,7 +163,8 @@ contract Branch is ReentrancyGuard {
     function _openTrove(uint256 collAmt, uint256 usdpmAmt, address upperHint, address lowerHint) internal {
         Trove storage t = troves[msg.sender];
         require(t.status != Status.Active, "trove active");
-        uint256 price = priceFeed.fetchPrice();
+        (uint256 price, bool riskyPaused,) = priceFeed.fetchPriceWithFlags();
+        require(!riskyPaused, "Price too old: borrowing paused");
         uint256 fee = _fee(usdpmAmt, borrowFeeBps);
         uint256 debt = usdpmAmt + fee + gasComp; // reserve is part of the debt, refunded on close
         require(debt >= minDebt, "below min debt");
@@ -201,7 +202,9 @@ contract Branch is ReentrancyGuard {
         require(t.status == Status.Active, "no trove");
         require(collIn == 0 || collOut == 0, "coll in+out");
         require(borrow == 0 || repay == 0, "borrow+repay");
-        uint256 price = priceFeed.fetchPrice();
+        (uint256 price, bool riskyPaused,) = priceFeed.fetchPriceWithFlags();
+        // Stale price: only safety-increasing actions (repay, add collateral) are allowed.
+        if (riskyPaused) require(borrow == 0 && collOut == 0, "Price too old: borrow/withdraw paused");
         _applyPending(msg.sender);
         bool rm = isRecoveryMode(price);
         uint256 oldIcr = _icr(t.coll, t.debt, price);
@@ -316,7 +319,8 @@ contract Branch is ReentrancyGuard {
     function redeem(uint256 usdpmAmt, uint256 maxIterations, uint256 minCollOut, address upperHint, address lowerHint)
         external nonReentrant
     {
-        uint256 price = priceFeed.fetchPrice();
+        (uint256 price,, bool redemptionsPaused) = priceFeed.fetchPriceWithFlags();
+        require(!redemptionsPaused, "Price sources unsettled: redemptions paused");
         require(_tcr(price) >= MCR, "TCR < MCR");
         uint256 remaining = usdpmAmt;
         uint256 collOut;

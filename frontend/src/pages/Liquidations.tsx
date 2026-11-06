@@ -1,6 +1,6 @@
 import { useReadContracts } from 'wagmi';
 import { useP, branchAbi, fmt, pct, short, E18 } from '../data';
-import { Title, CollSelect, Perf } from '../ui/common';
+import { Title, CollSelect, Perf, PriceNotice } from '../ui/common';
 
 export default function Liquidations() {
   const { b, c, run, send, isPending, address } = useP();
@@ -21,6 +21,7 @@ export default function Liquidations() {
   return (<div className="page">
     <Title t="Liquidations" sub={`Vaults below ${pct(b.mcr)} can be liquidated by anyone. The liquidator earns the 200 USDPM reserve plus 0.5% of the collateral.`} />
     <CollSelect />
+    <PriceNotice />
     <div style={{ display: 'flex', alignItems: 'center', margin: '0 0 12px' }}>
       <h3 style={{ margin: 0, flex: 1 }}>Open {c.symbol} vaults ({rows.length})</h3>
       <button className="btn sm" data-testid="liquidate-all" disabled={!address || eligible.length === 0 || isPending} onClick={() => run('Liquidate all', () => send({ address: c.branch, abi: branchAbi, functionName: 'batchLiquidate', args: [eligible.map((r) => r.o)] }))}>Liquidate all eligible ({eligible.length})</button>

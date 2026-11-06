@@ -1,0 +1,21 @@
+{
+  "chainId": 369,
+  "status": "PLAN ONLY - NOT DEPLOYED",
+  "surveyedAt": "2026-11-06 (Australia/Sydney), DexScreener + read-only fork check",
+  "source": "contracts/script/MainnetOracleConfig.sol",
+  "robustFeed": { "maxSpreadBps": 500, "maxFrozenAge": "2 hours", "frozenGrace": "15 minutes" },
+  "twap": { "period": "30 minutes", "maxAge": "2 hours", "maxDeviationBps": { "major": 2000, "thin": 3000 } },
+  "usdLeg": {
+    "primary": { "pair": "0x6753560538ECa67617A9Ce605178F788bE7E524E", "desc": "WPLS/USDC(eth) PulseX v1", "quoteDecimals": 6, "minQuoteReserve": "150,000 USDC" },
+    "fallback": { "type": "FetchOracle", "oracle": "0xCe9DEa26eB6bEaEc73CFf3BACdF3F9e42BB89951", "queryId": "0x83245f6a6a2f6458558a706270fbcc35ac3a81917602c1313d3bfa998dcc2d4b", "disputeBuffer": "20 minutes", "maxAge": "4 hours" }
+  },
+  "collaterals": {
+    "WPLS":  { "token": "0xA1077a294dDE1B09bB078844df40758a5D0f9a27", "decimals": 18, "primary": "WPLS/USDC TWAP", "fallback": "Fetch PLS/USD", "priceAtSurvey": 0.00000549 },
+    "HEX":   { "token": "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39", "decimals": 8,  "primaryPair": "0x19BB45a7270177e303DEe6eAA6F5Ad700812bA98", "fallbackPair": "0xf1F4ee610b2bAbB05C635F726eF8B0C568c8dc65", "minWPLS": ["18e9", "13e9"], "priceAtSurvey": 0.00120 },
+    "PLSX":  { "token": "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab", "decimals": 18, "primaryPair": "0x1b45b9148791d3a104184Cd5DFE5CE57193a3ee9", "fallbackPair": "0x149B2C629e652f2E89E11cd57e5d4D77ee166f9F", "minWPLS": ["45e9", "18e9"], "priceAtSurvey": 0.00000389 },
+    "INC":   { "token": "0x2fa878Ab3F87CC1C9737Fc071108F904c0B0C95d", "decimals": 18, "primaryPair": "0xf808Bb6265e9Ca27002c0A04562Bf50d4FE37EAA", "fallbackPair": "0x5B9661276708202DD1A0dD2346A3856b00d3c251", "minWPLS": ["17e9", "4.5e9"], "priceAtSurvey": 0.240, "note": "thin fallback; keep debt cap low" },
+    "pDAI":  { "token": "0x6B175474E89094C44Da98b954EedeAC495271d0F", "decimals": 18, "primaryPair": "0xaE8429918FdBF9a5867e3243697637Dc56aa76A1", "fallbackPair": "0x947b4633e32E0c7f2c76753B43F008480715416D", "minWPLS": ["18e9", "1.7e9"], "priceAtSurvey": 0.00114, "note": "NEVER $1 - priced from its live pDAI/WPLS market" },
+    "eHEX":  { "token": "0x57fde0a71132198BBeC939B98976993d8D89D225", "decimals": 8,  "primaryPair": "0xF0eA3efE42C11c8819948Ec2D3179F4084863D3F", "fallbackPath": "eHEX/HEX 0x922723FC4de3122F7DC837E2CD2b82Dce9dA81d2 x HEX/WPLS v1 x Fetch", "minWPLS": ["7e9"], "minHEX": "40e6", "priceAtSurvey": 0.000516, "note": "thin; low debt cap or launch later" },
+    "pWETH": { "token": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "decimals": 18, "primaryPair": "0x7994d526A127979BcB9Ec7C98509BB5C7ebD78FD", "fallbackPair": "same pair (no second usable pool)", "minWPLS": ["3e9"], "priceAtSurvey": 0.00000548, "note": "forked WETH, ~$67k pool only; fallback token leg NOT independent; very low cap or launch later" }
+  }
+}

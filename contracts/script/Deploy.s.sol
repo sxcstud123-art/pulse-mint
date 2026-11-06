@@ -10,6 +10,8 @@ import {MockERC20} from "../src/mocks/MockERC20.sol";
 import {MockPriceFeed} from "../src/oracles/MockPriceFeed.sol";
 
 /// @notice TESTNET deploy (PulseChain testnet v4, chain 943). Uses mock tokens + mock price feeds.
+/// MockPriceFeed exposes the same fetchPriceWithFlags() as RobustPriceFeed (flags settable by owner for demos).
+/// Mainnet oracle wiring lives in script/MainnetOracleConfig.sol (not deployed).
 /// Run (NOT run by the agent):
 ///   export DEPLOYER_PRIVATE_KEY=0x...   # throwaway testnet key only
 ///   forge script script/Deploy.s.sol --rpc-url pulsechain_testnet --broadcast

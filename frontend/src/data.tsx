@@ -8,8 +8,12 @@ import Erc20Abi from './abis/MockERC20.json';
 import StakingAbi from './abis/PMNTStaking.json';
 
 export const branchAbi = BranchAbi as Abi, erc20 = Erc20Abi as Abi, stakingAbi = StakingAbi as Abi;
-// MockPriceFeed (testnet) has a view `price()`; production feeds need an equivalent view.
-export const feedAbi = [{ type: 'function', name: 'price', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256' }] }] as const;
+// Every feed (MockPriceFeed on testnet, RobustPriceFeed on mainnet) has fetchPriceWithFlags(). It is not a
+// view on-chain, but an eth_call simulates it safely and returns the price plus the two pause flags.
+export const feedAbi = [{ type: 'function', name: 'fetchPriceWithFlags', stateMutability: 'view', inputs: [],
+  outputs: [{ type: 'uint256' }, { type: 'bool' }, { type: 'bool' }] },
+  // older testnet MockPriceFeeds only have price(); used as a fallback so the app still shows prices
+  { type: 'function', name: 'price', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256' }] }] as const;
 export const EXPLORER = 'https://scan.v4.testnet.pulsechain.com';
 export const ZERO = '0x0000000000000000000000000000000000000000' as const;
 export const E18 = 10n ** 18n;
@@ -27,7 +31,7 @@ export const usd = (n: number) => '$' + (n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' :
 export const priceStr = (p?: bigint) => (p === undefined ? '–' : '$' + Number(formatUnits(p, 18)).toPrecision(4));
 export const short = (a?: string) => (a ? a.slice(0, 6) + '…' + a.slice(-4) : '');
 
-export type BranchStats = { c: Coll; price?: bigint; tcr?: bigint; mcr?: bigint; ccr?: bigint; debt?: bigint; coll?: bigint; cap?: bigint; sp?: bigint; size?: bigint; tail?: string; gasComp?: bigint; minDebt?: bigint; owners?: bigint; valueUsd: number };
+export type BranchStats = { c: Coll; price?: bigint; tcr?: bigint; mcr?: bigint; ccr?: bigint; debt?: bigint; coll?: bigint; cap?: bigint; sp?: bigint; size?: bigint; tail?: string; gasComp?: bigint; minDebt?: bigint; owners?: bigint; valueUsd: number; riskyPaused: boolean; redemptionsPaused: boolean };
 
 type Ctx = ReturnType<typeof useBuild>;
 const C = createContext<Ctx | null>(null);
@@ -48,13 +52,14 @@ function useBuild() {
   const base = useReadContracts({ contracts: COLLATERALS.flatMap((c) => F.map((fn) => ({ address: c.branch, abi: branchAbi, functionName: fn }))) });
   const g = (bi: number, k: number) => base.data?.[bi * F.length + k]?.result as any;
   const feeds = COLLATERALS.map((_, bi) => g(bi, 0) as `0x${string}` | undefined);
-  const prices = useReadContracts({ contracts: feeds.map((f) => ({ address: (f ?? ZERO) as `0x${string}`, abi: feedAbi, functionName: 'price' })), query: { enabled: feeds.every(Boolean) } });
+  const prices = useReadContracts({ contracts: feeds.flatMap((f) => [{ address: (f ?? ZERO) as `0x${string}`, abi: feedAbi, functionName: 'fetchPriceWithFlags' }, { address: (f ?? ZERO) as `0x${string}`, abi: feedAbi, functionName: 'price' }]), query: { enabled: feeds.every(Boolean), refetchInterval: 60_000 } });
   const branches: BranchStats[] = COLLATERALS.map((c, bi) => {
-    const price = prices.data?.[bi]?.result as bigint | undefined;
+    const pr = prices.data?.[2 * bi]?.result as readonly [bigint, boolean, boolean] | undefined;
+    const price = pr?.[0] ?? (prices.data?.[2 * bi + 1]?.result as bigint | undefined), riskyPaused = !!pr?.[1], redemptionsPaused = !!pr?.[2];
     const debt = g(bi, 3), coll = g(bi, 4);
     const valueUsd = price && coll !== undefined ? num(coll * price / 10n ** BigInt(c.decimals)) : 0;
     const tcr = price && debt ? (coll * price / 10n ** BigInt(c.decimals)) * E18 / debt : debt === 0n ? undefined : undefined;
-    return { c, price, tcr, mcr: g(bi, 1), ccr: g(bi, 2), debt, coll, cap: g(bi, 5), sp: g(bi, 6), size: g(bi, 7), tail: g(bi, 8), gasComp: g(bi, 9), minDebt: g(bi, 10), owners: g(bi, 11), valueUsd };
+    return { c, price, tcr, mcr: g(bi, 1), ccr: g(bi, 2), debt, coll, cap: g(bi, 5), sp: g(bi, 6), size: g(bi, 7), tail: g(bi, 8), gasComp: g(bi, 9), minDebt: g(bi, 10), owners: g(bi, 11), valueUsd, riskyPaused, redemptionsPaused };
   });
   const totDebt = branches.reduce((a, b) => a + num(b.debt), 0);
   const tvl = branches.reduce((a, b) => a + b.valueUsd, 0);

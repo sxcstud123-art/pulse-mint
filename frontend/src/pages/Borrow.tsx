@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useP, branchAbi, erc20, fmt, pct, priceStr, num, E18 } from '../data';
-import { Title, CollSelect, Amount, parse, Tabs, Row, Perf, NeedWallet } from '../ui/common';
+import { Title, CollSelect, Amount, parse, Tabs, Row, Perf, NeedWallet, PriceNotice } from '../ui/common';
 import { parseUnits } from 'viem';
 
 export default function Borrow() {
@@ -29,6 +29,8 @@ export default function Borrow() {
   const maxRepay = has && usdpmBal !== undefined && b.minDebt !== undefined ? (() => { const r = my.vDebt - b.minDebt!; return r < 0n ? 0n : (usdpmBal < r ? usdpmBal : r); })() : 0n;
   const liqPrice = (m?: bigint) => (m && newColl > 0n && newDebt > 0n ? newDebt * m / E18 * scale / newColl : undefined);
   const tooLow = newIcr !== undefined && b.mcr !== undefined && newIcr < b.mcr && (dAmt > 0n || dColl > 0n);
+  // Stale price: block new borrowing / opening and collateral withdrawal (repay and add collateral stay open)
+  const staleBlocked = b.riskyPaused && (!has || (isBorrow && dAmt > 0n) || (!isBorrow && dColl > 0n));
   const inRM = b.tcr !== undefined && b.ccr !== undefined && b.tcr < b.ccr;
 
   const confirm = () => run(has ? 'Adjust vault' : 'Open vault', async () => {
@@ -42,6 +44,7 @@ export default function Borrow() {
   return (<div className="page">
     <Title t="Borrow USDPM" sub="Lock collateral, borrow USDPM. 0% interest: a one-off 0.5% fee." />
     <CollSelect />
+    <PriceNotice only="borrow" />
     <div className="cols">
       <div><div className="col-h">Your {c.symbol} Vault</div>
         <div className="card">
@@ -55,8 +58,9 @@ export default function Borrow() {
               <Amount id="repay" label="Repay USDPM" value={amt} set={setAmt} max={maxRepay} unit="USDPM" />
               <Amount id="withdraw" label={`Withdraw ${c.symbol}`} value={collIn} set={setCollIn} max={my.vColl} dec={c.decimals} unit={c.symbol} />
             </>}
+            {staleBlocked && <div className="alert danger">Paused right now: the {c.symbol} price is over 2 hours old. You can still repay or add collateral.</div>}
             {tooLow && <div className="alert danger">This would put the vault below the minimum ratio ({pct(b.mcr)}).</div>}
-            <button className="btn" data-testid="confirm-borrow" disabled={isPending || (!has && !isBorrow) || (dAmt === 0n && dColl === 0n)} onClick={confirm}>{has ? 'Confirm' : 'Open vault'}</button>
+            <button className="btn" data-testid="confirm-borrow" disabled={isPending || staleBlocked || (!has && !isBorrow) || (dAmt === 0n && dColl === 0n)} onClick={confirm}>{has ? 'Confirm' : 'Open vault'}</button>
             {has && !isBorrow && <button className="btn secondary" data-testid="close-vault" onClick={() => run('Close vault', () => send({ address: c.branch, abi: branchAbi, functionName: 'closeTrove' }))}>Close vault (repay {fmt(my.vDebt - gas)} USDPM)</button>}
             <button className="btn secondary" data-testid="mint-test" onClick={() => run('Mint test ' + c.symbol, () => send({ address: c.token, abi: erc20, functionName: 'mint', args: [me, parseUnits('1000000000', c.decimals)] }))}>Get 1,000,000,000 test {c.symbol}</button>
             {(my.surplus ?? 0n) > 0n && <button className="btn secondary" onClick={() => run('Claim surplus', () => send({ address: c.branch, abi: branchAbi, functionName: 'claimCollSurplus' }))}>Claim {fmt(my.surplus, c.decimals)} {c.symbol} left after redemption</button>}

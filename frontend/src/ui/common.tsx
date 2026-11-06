@@ -51,3 +51,15 @@ export function NeedWallet({ children }: { children: ReactNode }) {
   const { address } = useP();
   return address ? <>{children}</> : <div className="alert info">Connect a wallet (top right) to use this form. Stats are shown read-only.</div>;
 }
+
+/** Plain-language notice when the price feed has paused some actions for the selected collateral. */
+export function PriceNotice({ only }: { only?: 'borrow' | 'redeem' }) {
+  const { b, c } = useP();
+  const showRisky = b.riskyPaused && only !== 'redeem';
+  const showRed = b.redemptionsPaused && only !== 'borrow';
+  if (!showRisky && !showRed) return null;
+  return (<div className="alert warn" data-testid="price-notice">
+    {showRisky && <p><b>New borrowing and collateral withdrawals are paused for {c.symbol}.</b> The price feed has not had a fresh price for over 2 hours, so it is unsafe to let anyone borrow more against an old price. You can still repay, add collateral and close your vault, and liquidations keep running. Everything reopens automatically as soon as a fresh price arrives.</p>}
+    {showRed && <p><b>Redemptions are paused for {c.symbol}.</b> The two price sources disagree, or the feed has briefly lost its price, so a redemption could pay out at the wrong rate. They reopen automatically when the sources agree again. Liquidations are not affected.</p>}
+  </div>);
+}

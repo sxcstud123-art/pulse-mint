@@ -111,4 +111,11 @@ contract PulseXTwapFeed is IPriceSource, IPriceFeed {
         require(ok, "TWAP unsafe");
         return p;
     }
+
+    /// Strict feed has no last-good state: it reverts when unsafe, so it never reports pause flags.
+    function fetchPriceWithFlags() external returns (uint256, bool, bool) {
+        (uint256 p, bool ok) = tryFetch();
+        require(ok, "TWAP unsafe");
+        return (p, false, false);
+    }
 }

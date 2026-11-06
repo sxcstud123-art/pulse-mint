@@ -118,6 +118,13 @@ The **Liquidations** page lists every vault, riskiest first. Ratios under the mi
   - you can't withdraw collateral or close your vault;
   - new vaults need at least the CCR.
   Repaying and adding collateral always work.
+- **Prices are a short average, so they can lag.** Pulse Mint uses a 30-minute average price from PulseX (a "TWAP"), checked against a second, independent source (the Fetch Oracle PLS/USD price). This makes the price very hard to fake with one big trade, but in a fast market the app's price can be a few minutes behind what you see on PulseX. That's expected, so keep a healthy ratio.
+- **Price pauses (you'll see a yellow notice on the page):**
+  - A short glitch of a few minutes pauses nothing.
+  - If the two price sources disagree, or the feed loses its price for more than 15 minutes, **redemptions pause**. Liquidations keep working.
+  - If there has been **no fresh price for over 2 hours**, **new borrowing and collateral withdrawals pause** too.
+  - **Repaying, adding collateral, closing your vault and liquidations always stay open.** Everything reopens by itself when a fresh price comes back.
+- **pDAI is not $1.** It is priced from its real PulseX market like every other coin.
 - **Only use the official site and check contract addresses.**
 - **Never share your seed phrase.** Pulse Mint will never ask for it.
 - **Unaudited, testnet only.** Don't use real funds until there has been an audit and a mainnet launch.

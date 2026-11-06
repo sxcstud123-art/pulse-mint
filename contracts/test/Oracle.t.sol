@@ -26,7 +26,7 @@ contract OracleTest is Test {
         pair.setReserves(uint112(1_000_000e8), uint112(10_000e18));
         twap = new PulseXTwapFeed(address(pair), HEX, 8, 18, 30 minutes, 2 hours, 5_000e18, 2_000);
         fb = new FixedSource();
-        robust = new RobustPriceFeed(address(twap), address(fb), 300);
+        robust = new RobustPriceFeed(address(twap), address(fb), 300, 2 hours, 15 minutes);
     }
 
     function test_twap_basicPrice() public {

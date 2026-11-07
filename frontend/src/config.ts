@@ -1,19 +1,26 @@
 import { defineChain } from 'viem';
 import { createConfig, http } from 'wagmi';
 import { injected } from 'wagmi/connectors';
+import { PULSE_TESTNET_CHAIN_ID, PULSE_TESTNET_CHAIN_NAME, PULSE_TESTNET_EXPLORER, PULSE_TESTNET_NATIVE, PULSE_TESTNET_RPC } from './wallet/pulseChain';
 
 export const pulsechainTestnet = defineChain({
-  id: 943, name: 'PulseChain Testnet v4', nativeCurrency: { name: 'Test PLS', symbol: 'tPLS', decimals: 18 },
-  rpcUrls: { default: { http: ['https://rpc.v4.testnet.pulsechain.com'] } },
-  blockExplorers: { default: { name: 'Otter', url: 'https://scan.v4.testnet.pulsechain.com' } }, testnet: true,
+  id: PULSE_TESTNET_CHAIN_ID,
+  name: PULSE_TESTNET_CHAIN_NAME,
+  nativeCurrency: { name: PULSE_TESTNET_NATIVE.name, symbol: PULSE_TESTNET_NATIVE.symbol, decimals: PULSE_TESTNET_NATIVE.decimals },
+  rpcUrls: { default: { http: [PULSE_TESTNET_RPC] } },
+  blockExplorers: { default: { name: 'blockscout', url: PULSE_TESTNET_EXPLORER } },
+  testnet: true,
 });
+// Recognized so the app can block it. Not a wagmi chain: writes must not target mainnet.
 export const pulsechain = defineChain({
   id: 369, name: 'PulseChain', nativeCurrency: { name: 'Pulse', symbol: 'PLS', decimals: 18 },
   rpcUrls: { default: { http: ['https://rpc.pulsechain.com'] } },
 });
 
 export const wagmiConfig = createConfig({
-  chains: [pulsechainTestnet], connectors: [injected()],
+  chains: [pulsechainTestnet],
+  // shimDisconnect off: wallet_requestPermissions hangs in MetaMask's mobile browser and the Connect button looks dead.
+  connectors: [injected({ shimDisconnect: false, unstable_shimAsyncInject: 2_000 })],
   transports: { [pulsechainTestnet.id]: http() },
 });
 

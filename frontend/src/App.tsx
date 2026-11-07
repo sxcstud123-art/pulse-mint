@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useAccount, useConnect, useDisconnect, useSwitchChain } from 'wagmi';
-import { pulsechainTestnet } from './config';
-import { ProtocolProvider, useP, priceStr, pct, short, EXPLORER } from './data';
+import { ProtocolProvider, useP, priceStr, pct, EXPLORER } from './data';
 import Logo from './ui/Logo';
 import { Icons } from './ui/icons';
+import { NetworkBanner, WalletControls } from './wallet/WalletControls';
 import Start from './pages/Start'; import Borrow from './pages/Borrow'; import Stability from './pages/Stability';
 import Staking from './pages/Staking'; import Redemptions from './pages/Redemptions'; import Liquidations from './pages/Liquidations';
 import Analytics from './pages/Analytics'; import Docs from './pages/Docs';
@@ -16,8 +15,6 @@ const NAV = [
 
 function TopBar({ theme, toggle, menu }: { theme: string; toggle: () => void; menu: () => void }) {
   const { systemCR, anyRM, b, c, my } = useP();
-  const { address, isConnected, chainId } = useAccount();
-  const { connect, connectors } = useConnect(); const { disconnect } = useDisconnect(); const { switchChain } = useSwitchChain();
   return (<header className="topbar">
     <button className="menubtn" data-testid="menu" aria-label="Open menu" onClick={menu}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
     <div className="mbrand"><Logo size={30} /><b>Pulse Mint</b></div>
@@ -28,9 +25,7 @@ function TopBar({ theme, toggle, menu }: { theme: string; toggle: () => void; me
       <div className="price"><div className="dot" style={{ background: '#0ea5e9' }}>$</div><div className="tstat"><span>USDPM</span><b>$1.00 target</b></div></div>
       <div className="price"><div className="dot" style={{ background: '#334155' }}>{c.symbol.slice(0, 2)}</div><div className="tstat"><span>{c.symbol}</span><b>{priceStr(b.price)}</b></div></div>
     </div>
-    {isConnected && chainId !== pulsechainTestnet.id && <button className="btn sm danger" onClick={() => switchChain({ chainId: pulsechainTestnet.id })}>Switch network</button>}
-    {isConnected ? <button className="pill" data-testid="wallet-pill" title="Disconnect" onClick={() => disconnect()}>{short(address)}<small>PulseChain Testnet v4</small></button>
-      : <button className="pill" data-testid="connect" onClick={() => connect({ connector: connectors[0] })}>Connect wallet<small>PulseChain Testnet v4</small></button>}
+    <WalletControls />
     <button className="iconbtn" data-testid="theme" onClick={toggle} title="Toggle light/dark">{theme === 'dark' ? <Icons.sun /> : <Icons.moon />}</button>
   </header>);
 }
@@ -56,7 +51,7 @@ export default function App() {
       <nav className="nav">{NAV.map(([id, label, I]) => <button key={id} data-testid={'nav-' + id} className={page === id ? 'active' : ''} onClick={() => go(id)}><I />{label}</button>)}</nav>
       <div className="side-foot">PulseChain testnet v4 · chain 943<br />Unaudited prototype. Test funds only.</div>
     </aside>
-    <main className="main"><TopBar theme={theme} toggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')} menu={() => setOpen(true)} />{P[page] ?? P.start}</main>
+    <main className="main"><TopBar theme={theme} toggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')} menu={() => setOpen(true)} /><NetworkBanner />{P[page] ?? P.start}</main>
     <Toast />
   </div></ProtocolProvider>);
 }

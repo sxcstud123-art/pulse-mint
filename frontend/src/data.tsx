@@ -3,6 +3,7 @@ import { useAccount, useReadContracts, useWriteContract, usePublicClient } from 
 import { useQueryClient } from '@tanstack/react-query';
 import { formatUnits, type Abi } from 'viem';
 import { ADDR, COLLATERALS, type Coll } from './config';
+import { PULSE_TESTNET_CHAIN_ID, hasRequest, parseChainId, writeBlockReason } from './wallet/pulseChain';
 import BranchAbi from './abis/Branch.json';
 import Erc20Abi from './abis/MockERC20.json';
 import StakingAbi from './abis/PMNTStaking.json';
@@ -39,7 +40,7 @@ export const useP = () => useContext(C)!;
 export function ProtocolProvider({ children }: { children: ReactNode }) { const v = useBuild(); return <C.Provider value={v}>{children}</C.Provider>; }
 
 function useBuild() {
-  const { address } = useAccount();
+  const { address, chainId, isConnected } = useAccount();
   const me = (address ?? ZERO) as `0x${string}`;
   const [sel, setSel] = useState(0);
   const [toast, setToast] = useState<{ msg: string; tx?: string } | null>(null);
@@ -97,6 +98,15 @@ function useBuild() {
 
   // ---- writes: wait for each receipt (approve -> action), then refresh everything ----
   const send = async (args: any) => {
+    // The wallet's live chain id is the source of truth, so a stale UI cannot send on mainnet.
+    let live = chainId;
+    const eth = (globalThis as { ethereum?: unknown }).ethereum;
+    if (hasRequest(eth)) {
+      try { live = parseChainId(await eth.request({ method: 'eth_chainId' })) ?? live; } catch { /* keep the wagmi chain id */ }
+    }
+    if (!isConnected || live !== PULSE_TESTNET_CHAIN_ID) {
+      throw new Error(writeBlockReason(live, true) ?? 'Switch to PulseChain Testnet v4 (chain 943).');
+    }
     const hash = await writeContractAsync(args);
     setToast((t) => ({ msg: t?.msg ?? '', tx: hash }));
     const rc = await client!.waitForTransactionReceipt({ hash });

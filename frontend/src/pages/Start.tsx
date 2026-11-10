@@ -1,6 +1,7 @@
 import { useP, fmt, pct, priceStr } from '../data';
 import { Perf } from '../ui/common';
 import { Icons } from '../ui/icons';
+import { WatchHow } from '../ui/WatchHow';
 
 const FEATURES = [
   ['borrow', 'Borrow USDPM', 'Lock PLS, HEX, PLSX, INC, pDAI, eHEX or bridged ETH and mint USDPM. You pay one 0.5% fee and no interest.', Icons.borrow],
@@ -18,6 +19,7 @@ export default function Start({ go }: { go: (p: string) => void }) {
       <h1>Borrow on PulseChain. <em>Zero interest.</em></h1>
       <p>Pulse Mint turns your PulseChain assets into USDPM, an over-collateralised dollar stablecoin.
         There is no interest and no repayment schedule. Your vault stays open as long as it is safely collateralised.</p>
+      <WatchHow src="02-connect-wallet.mp4" />
     </div>
     <div className="grid3">{FEATURES.map(([id, t, d, I]) => (
       <div className="card feature" key={id} onClick={() => go(id)} data-testid={'feature-' + id}><div className="ico"><I /></div><h4>{t}</h4><p>{d}</p></div>))}</div>

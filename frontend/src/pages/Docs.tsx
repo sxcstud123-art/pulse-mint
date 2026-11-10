@@ -1,4 +1,5 @@
 import { Title } from '../ui/common';
+import { HelpVideoList, WatchHow } from '../ui/WatchHow';
 export default function Docs() {
   return (<div className="page docs"><Title t="Docs" sub="Pulse Mint in plain English" />
     <div className="card">
@@ -7,7 +8,10 @@ export default function Docs() {
       <h3>Stability pool</h3><p>Deposit USDPM to earn liquidated collateral, usually worth more than the debt it covered, plus PMNT emissions.</p>
       <h3>Redemptions</h3><p>Anyone can exchange USDPM for $1 of collateral (minus 0.5%). The collateral is taken from the riskiest vault first, and that vault's debt goes down by the same amount.</p>
       <h3>Staking</h3><p>PMNT has a fixed supply of 100 million. Stakers receive the borrowing fees (USDPM) and redemption fees (collateral).</p>
-      <h3>Safety</h3><ul><li><b>Recovery mode:</b> when a collateral's system ratio drops below its critical ratio (CCR), withdrawals and closing are paused and new debt must be extra-safe.</li><li><b>Debt caps</b> limit exposure to thin assets such as INC and eHEX.</li></ul>
+      <h3 className="with-watch">Safety <WatchHow src="11-recovery-mode.mp4" /></h3><ul><li><b>Recovery mode:</b> when a collateral's system ratio drops below its critical ratio (CCR), withdrawals and closing are paused and new debt must be extra-safe.</li><li><b>Debt caps</b> limit exposure to thin assets such as INC and eHEX.</li></ul>
+      <h3>Help videos</h3>
+      <p>Short clips for each part of the app. They also sit beside the matching headings.</p>
+      <HelpVideoList />
       <h3>Prices and pauses</h3>
       <p>Prices use a short average over the last 30 minutes on PulseX (a TWAP), checked against a second, independent source (the Fetch Oracle PLS/USD price). The average makes the price very hard to fake with one big trade, but it means the app's price can <b>lag a fast market</b> by a few minutes. That is expected, not a bug. Keep a healthy collateral ratio so a quick drop doesn't catch you out.</p>
       <ul>

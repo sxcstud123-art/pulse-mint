@@ -9,7 +9,7 @@ export default function Staking() {
   const a = parse(v);
   const share = totalStaked && myStake ? (num(myStake) / num(totalStaked)) * 100 : 0;
   return (<div className="page">
-    <Title t="Staking (PMNT)" sub="Stake PMNT to earn the protocol's borrowing fees (USDPM) and redemption fees (collateral)." />
+    <Title t="Staking (PMNT)" watch="08-staking-pmnt.mp4" sub="Stake PMNT to earn the protocol's borrowing fees (USDPM) and redemption fees (collateral)." />
     <div className="cols">
       <div><div className="col-h">Stake PMNT</div>
         <div className="card"><Tabs tabs={['Stake', 'Unstake']} cur={tab} set={(i) => { setTab(i); setV(''); }} />

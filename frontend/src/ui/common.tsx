@@ -2,8 +2,11 @@ import { useState, type ReactNode } from 'react';
 import { parseUnits, formatUnits } from 'viem';
 import { useP, fmt, pct, usd, num } from '../data';
 import { COLLATERALS } from '../config';
+import { WatchHow } from './WatchHow';
 
-export const Title = ({ t, sub }: { t: string; sub?: string }) => (<><div className="title"><h1>{t}</h1></div>{sub && <p className="subtitle">{sub}</p>}</>);
+export const Title = ({ t, sub, watch }: { t: string; sub?: string; watch?: string }) => (
+  <><div className="title"><h1>{t}</h1>{watch && <WatchHow src={watch} />}</div>{sub && <p className="subtitle">{sub}</p>}</>
+);
 export const Row = ({ k, v, id }: { k: ReactNode; v: ReactNode; id?: string }) => <div className="row"><span>{k}</span><b data-testid={id}>{v}</b></div>;
 
 export function CollSelect() {

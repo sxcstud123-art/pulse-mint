@@ -3,6 +3,7 @@ import { ProtocolProvider, useP, priceStr, pct, EXPLORER } from './data';
 import Logo from './ui/Logo';
 import { Icons } from './ui/icons';
 import { NetworkBanner, WalletControls } from './wallet/WalletControls';
+import { WatchHow } from './ui/WatchHow';
 import Start from './pages/Start'; import Borrow from './pages/Borrow'; import Stability from './pages/Stability';
 import Staking from './pages/Staking'; import Redemptions from './pages/Redemptions'; import Liquidations from './pages/Liquidations';
 import Analytics from './pages/Analytics'; import Docs from './pages/Docs';
@@ -18,7 +19,7 @@ function TopBar({ theme, toggle, menu }: { theme: string; toggle: () => void; me
   return (<header className="topbar">
     <button className="menubtn" data-testid="menu" aria-label="Open menu" onClick={menu}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
     <div className="mbrand"><Logo size={30} /><b>Pulse Mint</b></div>
-    <div className="tstat"><span>System ratio {anyRM ? '· recovery' : '· normal'}</span><b data-testid="system-cr" style={{ color: anyRM ? 'var(--danger)' : 'var(--ok)' }}>{systemCR ? (systemCR * 100).toFixed(2) + '%' : '–'}</b></div>
+    <div className="tstat"><span>System ratio {anyRM ? '· recovery' : '· normal'}</span><span className="with-watch"><b data-testid="system-cr" style={{ color: anyRM ? 'var(--danger)' : 'var(--ok)' }}>{systemCR ? (systemCR * 100).toFixed(2) + '%' : '–'}</b><WatchHow src="11-recovery-mode.mp4" compact /></span></div>
     <div className="tstat"><span>Your {c.symbol} ratio</span><b>{my.vDebt > 0n ? pct(my.icr) : '–'}</b></div>
     <div className="prices">
       <div className="price"><div className="dot" style={{ background: 'linear-gradient(135deg,#14b8a6,#34d399)' }}>PM</div><div className="tstat"><span>PMNT</span><b>no market yet</b></div></div>
@@ -26,6 +27,7 @@ function TopBar({ theme, toggle, menu }: { theme: string; toggle: () => void; me
       <div className="price"><div className="dot" style={{ background: '#334155' }}>{c.symbol.slice(0, 2)}</div><div className="tstat"><span>{c.symbol}</span><b>{priceStr(b.price)}</b></div></div>
     </div>
     <WalletControls />
+    <WatchHow src="02-connect-wallet.mp4" compact />
     <button className="iconbtn" data-testid="theme" onClick={toggle} title="Toggle light/dark">{theme === 'dark' ? <Icons.sun /> : <Icons.moon />}</button>
   </header>);
 }

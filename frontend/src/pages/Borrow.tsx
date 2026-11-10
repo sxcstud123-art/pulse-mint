@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useP, branchAbi, erc20, fmt, pct, priceStr, num, E18 } from '../data';
 import { Title, CollSelect, Amount, parse, Tabs, Row, Perf, NeedWallet, PriceNotice } from '../ui/common';
+import { WatchHow } from '../ui/WatchHow';
 import { parseUnits } from 'viem';
 
 export default function Borrow() {
@@ -46,7 +47,7 @@ export default function Borrow() {
     <CollSelect />
     <PriceNotice only="borrow" />
     <div className="cols">
-      <div><div className="col-h">Your {c.symbol} Vault</div>
+      <div><div className="col-h">Your {c.symbol} Vault <WatchHow src={isBorrow ? '01-borrow-open-vault.mp4' : '03-repay-debt.mp4'} /></div>
         <div className="card">
           <Tabs tabs={['Borrow', 'Repay']} cur={tab} set={(i) => { setTab(i); setCollIn(''); setAmt(''); }} />
           <NeedWallet>
@@ -61,20 +62,23 @@ export default function Borrow() {
             {staleBlocked && <div className="alert danger">Paused right now: the {c.symbol} price is over 2 hours old. You can still repay or add collateral.</div>}
             {tooLow && <div className="alert danger">This would put the vault below the minimum ratio ({pct(b.mcr)}).</div>}
             <button className="btn" data-testid="confirm-borrow" disabled={isPending || staleBlocked || (!has && !isBorrow) || (dAmt === 0n && dColl === 0n)} onClick={confirm}>{has ? 'Confirm' : 'Open vault'}</button>
-            {has && !isBorrow && <button className="btn secondary" data-testid="close-vault" onClick={() => run('Close vault', () => send({ address: c.branch, abi: branchAbi, functionName: 'closeTrove' }))}>Close vault (repay {fmt(my.vDebt - gas)} USDPM)</button>}
+            {!isBorrow && <div className="watch-row">
+              {has && <button className="btn secondary" data-testid="close-vault" onClick={() => run('Close vault', () => send({ address: c.branch, abi: branchAbi, functionName: 'closeTrove' }))}>Close vault (repay {fmt(my.vDebt - gas)} USDPM)</button>}
+              <WatchHow src="04-close-vault.mp4" />
+            </div>}
             <button className="btn secondary" data-testid="mint-test" onClick={() => run('Mint test ' + c.symbol, () => send({ address: c.token, abi: erc20, functionName: 'mint', args: [me, parseUnits('1000000000', c.decimals)] }))}>Get 1,000,000,000 test {c.symbol}</button>
             {(my.surplus ?? 0n) > 0n && <button className="btn secondary" onClick={() => run('Claim surplus', () => send({ address: c.branch, abi: branchAbi, functionName: 'claimCollSurplus' }))}>Claim {fmt(my.surplus, c.decimals)} {c.symbol} left after redemption</button>}
           </NeedWallet>
         </div>
       </div>
-      <div><div className="col-h">Transaction Stats</div>
+      <div><div className="col-h">Transaction Stats <WatchHow src="06-fees.mp4" /></div>
         <div className="stats">
           <Row k={isBorrow ? 'Deposit' : 'Withdraw'} v={`${fmt(dColl, c.decimals)} ${c.symbol}`} />
           <Row k="Borrowing fee (0.5%)" v={`${fmt(isBorrow ? fee(dAmt) : 0n)} USDPM`} />
           <Row k="Liquidation reserve" v={`${has || !isBorrow ? '0' : fmt(gas, 18, 0)} USDPM`} />
           <Row k={isBorrow ? 'You receive' : 'Repay'} v={`${fmt(dAmt)} USDPM`} />
         </div>
-        <div className="col-h">Vault Stats</div>
+        <div className="col-h">Vault Stats <WatchHow src="05-collateral-ratio.mp4" /></div>
         <div className="stats">
           <Row k="Collateral" v={`${fmt(newColl, c.decimals)} ${c.symbol}`} id="vault-coll" />
           <Row k="Debt (incl. reserve)" v={`${fmt(newDebt)} USDPM`} id="vault-debt" />

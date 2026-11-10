@@ -19,7 +19,7 @@ export default function Liquidations() {
   }).filter((r) => r.active).sort((x, y) => (x.icr ?? 0n) < (y.icr ?? 0n) ? -1 : 1);
   const eligible = rows.filter((r) => r.icr !== undefined && b.mcr !== undefined && r.icr < b.mcr);
   return (<div className="page">
-    <Title t="Liquidations" sub={`Vaults below ${pct(b.mcr)} can be liquidated by anyone. The liquidator earns the 200 USDPM reserve plus 0.5% of the collateral.`} />
+    <Title t="Liquidations" watch="09-liquidations.mp4" sub={`Vaults below ${pct(b.mcr)} can be liquidated by anyone. The liquidator earns the 200 USDPM reserve plus 0.5% of the collateral.`} />
     <CollSelect />
     <PriceNotice />
     <div style={{ display: 'flex', alignItems: 'center', margin: '0 0 12px' }}>

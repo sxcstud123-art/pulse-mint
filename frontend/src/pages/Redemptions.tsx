@@ -13,7 +13,7 @@ export default function Redemptions() {
   const net = gross - gross * 50n / 10000n;
   const blocked = b.redemptionsPaused || (b.tcr !== undefined && b.mcr !== undefined && b.tcr < b.mcr);
   return (<div className="page">
-    <Title t="Redemptions" sub="Swap USDPM for $1 of collateral. This is what holds USDPM close to its peg." />
+    <Title t="Redemptions" watch="10-redemptions.mp4" sub="Swap USDPM for $1 of collateral. This is what holds USDPM close to its peg." />
     <CollSelect />
     <PriceNotice only="redeem" />
     <div className="cols">

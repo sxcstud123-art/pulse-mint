@@ -9,7 +9,7 @@ export default function Stability() {
   const a = parse(v);
   const share = b.sp && my.spDep ? (num(my.spDep) / num(b.sp)) * 100 : 0;
   return (<div className="page">
-    <Title t="Stability Pool" sub={`Deposit USDPM to back ${c.symbol} vaults. Earn liquidated ${c.symbol} at a discount, plus PMNT.`} />
+    <Title t="Stability Pool" watch="07-stability-pool.mp4" sub={`Deposit USDPM to back ${c.symbol} vaults. Earn liquidated ${c.symbol} at a discount, plus PMNT.`} />
     <CollSelect />
     <div className="cols">
       <div><div className="col-h">Deposit USDPM</div>
